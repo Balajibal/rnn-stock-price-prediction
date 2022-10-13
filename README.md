@@ -29,6 +29,9 @@ Create the Model
 Predict the stock price and measure accuracy
 
 ## PROGRAM
+# Developed by : Balaji N
+# Register no : 2122202030006
+
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
