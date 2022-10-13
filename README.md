@@ -29,7 +29,7 @@ Create the Model
 Predict the stock price and measure accuracy
 
 ## PROGRAM
-
+```python
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -84,7 +84,7 @@ plt.xlabel('Time')
 plt.ylabel('Google Stock Price')
 plt.legend()
 plt.show()
-
+```
 ## OUTPUT
 
 ### True Stock Price, Predicted Stock Price vs time
