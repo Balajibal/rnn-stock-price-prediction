@@ -1,41 +1,49 @@
-### EX NO : 05
-### DATE  : 16.10.2022
-# <p align="center"> Stock Price Prediction </p>
+### EXP NO: 05
+
+### Date:16.10.2022
+
+# <p align = "center"> Stock Price Prediction </p>
 
 ## AIM
-
 To develop a Recurrent Neural Network model for stock price prediction.
 
 ## Problem Statement and Dataset
+We are developing the RNN model to predict the stock prices of Google using the dataset provided. The dataset has many features, but we will be predicting the "Open" feauture alone. We will be using a sequence of 60 readings to predict the 61st reading.we have taken 70 Inputs with 70 Neurons in the RNN Layer (hidden) and one neuron for the Output Layer.These parameters can be changed as per requirements.
 
 ## Neural Network Model
-
-Include the neural network model diagram.
-
+![dle5](https://user-images.githubusercontent.com/75243072/196336868-0cbaafea-a0ac-43fb-8a18-69b8f3d09f4b.jpeg)
 ## DESIGN STEPS
 
 ### STEP 1:
-
-Import required packages
+Import tensorflow library and preprocessing libraries.
 
 ### STEP 2:
-
-Load the Dataset
+Load the traning dataset and take one column values and scale it using minmaxscaler.
 
 ### STEP 3:
-
-Create the Model
+Split x_train(0-60 values) and y_train(61 st value).
 
 ### STEP 4:
+Create a RNN model with required no of neurons with one output neuron.
 
-Predict the stock price and measure accuracy
+### STEP 5:
+Fit the model and load testing dataset.For x_test,combine the values of both datasets.
+
+### STEP 6:
+Follow the same splitting.Make the prediction.
+
+### STEP 7:
+Plot graph and find the mse value.
+
+
+
 
 ## PROGRAM
-
-Developed by : Balaji N 
-Register no : 2122202030006
-
 ```python
+# Developed By: Balaji N
+# Register Number:212220230006
+
+
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -59,16 +67,12 @@ for i in range(60, 1259):
 X_train, y_train = np.array(X_train_array), np.array(y_train_array)
 X_train1 = X_train.reshape((X_train.shape[0], X_train.shape[1],1))
 X_train.shape
-length = 60
-n_features = 1
 model = Sequential()
-model.add(layers.SimpleRNN(50,input_shape=(60,1)))
+model.add(layers.SimpleRNN(70,input_shape=(60,1)))
 model.add(layers.Dense(1))
-
 model.compile(optimizer='adam', loss='mae')
-model.summary()
 model.fit(X_train1,y_train,epochs=100, batch_size=32)
-dataset_test = pd.read_csv('testset.csv')
+dataset_test = pd.read_csv('testset (1).csv')
 test_set = dataset_test.iloc[:,1:2].values
 test_set.shape
 dataset_total = pd.concat((dataset_train['Open'],dataset_test['Open']),axis=0)
@@ -76,8 +80,10 @@ inputs = dataset_total.values
 inputs = inputs.reshape(-1,1)
 inputs_scaled=sc.transform(inputs)
 X_test = []
+y_test=[]
 for i in range(60,1384):
   X_test.append(inputs_scaled[i-60:i,0])
+  y_test.append(inputs_scaled[i,0])
 X_test = np.array(X_test)
 X_test = np.reshape(X_test,(X_test.shape[0], X_test.shape[1],1))
 X_test.shape
@@ -90,18 +96,18 @@ plt.xlabel('Time')
 plt.ylabel('Google Stock Price')
 plt.legend()
 plt.show()
+from sklearn.metrics import mean_squared_error as mse
+mse(y_test,predicted_stock_price)
 ```
-## OUTPUT
+## <br><br><br><br><br>OUTPUT
 
 ### True Stock Price, Predicted Stock Price vs time
-
-![Screenshot (278)](https://user-images.githubusercontent.com/75234946/195599100-305c01a6-3378-46fd-8511-e6efad147bf6.png)
-
+![Screenshot (446)](https://user-images.githubusercontent.com/75243072/195996829-82b6dce8-3da5-4bbf-af0e-2e1d529492d6.png)
 
 ### Mean Square Error
+![Screenshot (445)](https://user-images.githubusercontent.com/75243072/195996823-2b267249-07e1-49b7-8a7c-2d9a69815e50.png)
 
-![Screenshot (279)](https://user-images.githubusercontent.com/75234946/195599273-4e628d13-4cff-4464-954e-acab3d013f28.png)
 
 
-## RESULT
-Thus, the Stock price is predicted using Recurrent Neural network.
+## <br><br><br><br>RESULT
+Thus, a Recurrent Neural Network model for stock price prediction is developed.
