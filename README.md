@@ -1,4 +1,6 @@
-# Stock Price Prediction
+### EX NO : 05
+### DATE  : 16.10.2022
+# <p align="center"> Stock Price Prediction </p>
 
 ## AIM
 
